@@ -16,7 +16,6 @@ def iter_namespace(ns_pkg):
 
 
 def main():
-    print("startme")
 
     mods = {
         name: importlib.import_module(name)
