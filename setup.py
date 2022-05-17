@@ -11,7 +11,7 @@ def read(fname):
 
 setup(
     name='startme',
-    version='0.0.2',
+    version='0.0.3',
     packages=['startme', 'startme.mods', 'startme.mods.internal'],
     scripts=['bin/startme'],
 
