@@ -11,12 +11,12 @@ def read(fname):
 
 setup(
     name='startme',
-    version='0.0.5',
+    version='0.0.6',
     packages=['startme', 'startme.mods', 'startme.mods.internal'],
     scripts=['bin/startme'],
 
     install_requires=[
-        'lightsleep>=0.0.4'
+        'lightsleep>=0.0.6'
     ],
 
     url='https://github.com/yaroslaff/startme',

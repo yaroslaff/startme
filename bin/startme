@@ -24,10 +24,12 @@ def get_args():
     return parser.parse_args()
 
 
+
+
 def main():
 
     args = get_args()
-    sleep = Sleep(hook=args.hook)
+    lsleep = Sleep(hook=args.hook)
 
     mods = {
         name: importlib.import_module(name)
@@ -69,7 +71,13 @@ def main():
 
 
         exectime = sch[min(sch, key=sch.get)]
-        sleep(exectime - time.time())
+        data = lsleep.sleep(exectime - time.time())
+        if data:
+            for j in sch:
+                if j.__class__.__name__ == data:
+                    j.on_schedule()
+                    sch[j] = j.reschedule()
+                    
 
 
 main()

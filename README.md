@@ -56,3 +56,22 @@ class StartMeExampleBoot(StartMe):
 ~~~
 
 All `StartMe` subclasses are automatically detected, loaded and executed. No need for systemd or cron inside virtualenv.
+
+## Advanced usage
+Startme uses interruptable [lightsleep](https://github.com/yaroslaff/lightsleep) so you can trigger immediate execution of cron tasks.
+
+~~~
+# Session 1, start startme
+$ startme --hook redis
+...
+
+# Session 2, redis-cli
+$ redis-cli publish sleep Ticker1min
+$ redis-cli publish sleep Ticker1min
+$ redis-cli publish sleep Ticker1min
+
+# Session 1 again, Ticker1min triggered
+00:06:28 Ticker1min tick 60
+00:06:28 Ticker1min tick 60
+00:06:28 Ticker1min tick 60
+~~~
