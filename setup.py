@@ -11,11 +11,13 @@ def read(fname):
 
 setup(
     name='startme',
-    version='0.0.4',
+    version='0.0.5',
     packages=['startme', 'startme.mods', 'startme.mods.internal'],
     scripts=['bin/startme'],
 
-    install_requires=[],
+    install_requires=[
+        'lightsleep>=0.0.4'
+    ],
 
     url='https://github.com/yaroslaff/startme',
     license='MIT',
@@ -23,7 +25,7 @@ setup(
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
     author_email='yaroslaff@gmail.com',
-    description='autostart python classes',
+    description='systemd/cron alternative for python virtualenv',
 
     python_requires='>=3',
     classifiers=[
