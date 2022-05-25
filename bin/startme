@@ -1,23 +1,13 @@
 #!/usr/bin/env python3
-import time
 import argparse
 import sys
 import os
 
 import importlib
-import pkgutil
 
-from lightsleep import Sleep
 
-from startme import StartMe, meta
-import startme.mods
+from startme.starter import Starter
 
-def iter_namespace(ns_pkg):
-    # Specifying the second argument (prefix) to iter_modules makes the
-    # returned name an absolute name instead of a relative one. This allows
-    # import_module to work without having to do additional modification to
-    # the name.
-    return pkgutil.iter_modules(ns_pkg.__path__, ns_pkg.__name__ + ".")
 
 
 def get_args():
@@ -74,62 +64,7 @@ def main():
         systemd(args.systemd)
         return
 
-    lsleep = Sleep(hook=args.hook)
-
-    mods = {
-        name: importlib.import_module(name)
-        for finder, name, ispkg
-        in iter_namespace(startme.mods)
-    }
-
-    smjobs = [ cls() for cls in meta.__inheritors__ ]
-
-    #
-    # on_start
-    #
-    for j in smjobs:
-        j.on_start()
-
-    #
-    # prepare schedule
-    # 
-
-    sch = {
-        j: j.reschedule()
-        for j in smjobs 
-    }
-
-
-    #
-    # loop over schedule
-    #
-
-    while True:
-
-        sch = {k:v for k,v in sch.items() if v is not None}
-
-        if not sch:
-            return 
-
-        now = time.time()
-        for j, jtime in sch.items():
-            if  now>=jtime:
-                j.on_schedule()
-                sch[j] = j.reschedule()
-
-        sch_list = [ time for j, time in sch.items() if time is not None]
-        
-        if not sch_list:
-            return
-              
-        exectime = min(sch_list)
-
-        data = lsleep.sleep(exectime - time.time())
-        if data:
-            for j in sch:
-                if j.__class__.__name__ == data:
-                    j.on_schedule()
-                    sch[j] = j.reschedule()
-
+    starter = Starter(hook=args.hook)
+    starter.run()
 
 main()

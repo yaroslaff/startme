@@ -75,3 +75,19 @@ $ redis-cli publish sleep Ticker1min
 00:06:28 Ticker1min tick 60
 00:06:28 Ticker1min tick 60
 ~~~
+
+## Install
+
+`pip3 install startme` or `pipenv install startme` or `pip3 install git+https://github.com/yaroslaff/startme`.
+
+### Add to systemd
+Use your project name instead of `test`:
+
+~~~
+startme --systemd test | sudo tee /etc/systemd/system/startme-test.service
+sudo systemctl daemon-reload 
+sudo systemctl enable startme-test.service
+sudo systemctl start startme-test.service
+~~~
+
+You may add lightsleep hook parametes to environment file `/etc/default`

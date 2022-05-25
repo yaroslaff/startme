@@ -2,6 +2,7 @@ import subprocess
 import threading
 import time
 
+
 class meta(type):
     __inheritors__ = list()
 
@@ -9,6 +10,7 @@ class meta(type):
         klass = type.__new__(meta, name, bases, dct)
         meta.__inheritors__.append(klass)
         return klass
+
 
 class StartMe(metaclass=meta):
     
