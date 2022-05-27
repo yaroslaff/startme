@@ -20,6 +20,7 @@ def get_args():
     parser = argparse.ArgumentParser(description='systemd/cron alternative for python virtual environment')
     parser.add_argument('--hook', default=def_hook, nargs='+', metavar=('METHOD', 'ARG'), help='use this hook with arguments')
     parser.add_argument('--systemd', metavar='NAME', help='install as systemd service to start on boot, provide NAME e.g. startme-project1')
+    parser.add_argument('--mods', '-m', metavar='PATH', nargs='*', help='path to modules to import (for development/testing)')
     return parser.parse_args()
 
 
@@ -64,7 +65,7 @@ def main():
         systemd(args.systemd)
         return
 
-    starter = Starter(hook=args.hook)
+    starter = Starter(hook=args.hook, mods=args.mods)
     starter.run()
 
 main()

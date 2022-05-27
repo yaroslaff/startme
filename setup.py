@@ -11,7 +11,7 @@ def read(fname):
 
 setup(
     name='startme',
-    version='0.0.8',
+    version='0.0.9',
     packages=['startme', 'startme.mods', 'startme.mods.internal'],
     scripts=['bin/startme'],
 
@@ -27,7 +27,7 @@ setup(
     author_email='yaroslaff@gmail.com',
     description='systemd/cron alternative for python virtualenv',
 
-    python_requires='>=3',
+    python_requires='>=3.6',
     classifiers=[
         'Development Status :: 3 - Alpha',
 

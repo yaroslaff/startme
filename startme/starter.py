@@ -1,6 +1,7 @@
 import pkgutil
 import importlib
 import time
+import os
 
 import startme.mods
 
@@ -13,18 +14,53 @@ def iter_namespace(ns_pkg):
     # the name.
     return pkgutil.iter_modules(ns_pkg.__path__, ns_pkg.__name__ + ".")
 
+def import_module(path):
+    """
+    Import a module given the full path/filename of the .py file
+
+    Python 3.4
+
+    """
+
+    module = None
+
+    try:
+
+        # Get module name and path from full path
+        module_dir, module_file = os.path.split(path)
+        module_name, module_ext = os.path.splitext(module_file)
+
+        # Get module "spec" from filename
+        spec = importlib.util.spec_from_file_location(module_name, path)
+
+        module = spec.loader.load_module()
+
+    except Exception as ec:
+        # Simple error printing
+        # Insert "sophisticated" stuff here
+        print(ec)
+
+    finally:
+        return module
 
 class Starter:
-    def __init__(self, hook):
+    def __init__(self, hook, mods=None):
         self._lsleep = Sleep(hook=hook)
-
+        self._mods = mods or list()
 
     def load_mods(self):
+
+        # load custom mods
+        for path in self._mods:
+            import_module(path)
+
+        # load installed mods
         mods = {
             name: importlib.import_module(name)
             for finder, name, ispkg
             in iter_namespace(startme.mods)
         }
+
 
     def startup(self):
 
