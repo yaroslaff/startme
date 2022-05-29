@@ -40,8 +40,9 @@ startme started
 
 [startme-examples](https://github.com/yaroslaff/startme-examples) has three very simple classes, inherited from `StartMe`. `StartMeExampleBoot` - wants to be executed once on start. `Ticker` wants to be executed every 10 seconds and `Ticker1min` wants to be executed every 1 minute. 
 
+All `StartMe` subclasses are automatically detected, loaded and executed. No need for systemd or cron inside virtualenv. If `startme` installed as systemd unit, example code will be started on restart automatically, no need for any installation except `pip3 install startme-examples`. **Magic!**
 
-All `StartMe` subclasses are automatically detected, loaded and executed. No need for systemd or cron inside virtualenv.
+You may have dozens of modules in requirements for your package, pip will install it automatically, and startme will start it automatically when startme itself starts from systemd. No matter how complex is your application, installation is one `pip3 install ...` command!
 
 ## Advanced usage
 Startme uses interruptable [lightsleep](https://github.com/yaroslaff/lightsleep) so you can trigger immediate execution of cron tasks.
