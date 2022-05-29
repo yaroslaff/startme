@@ -147,7 +147,7 @@ Uptime: 3 seconds
 ~~~
 
 ### Startme subclasses
-Startme has build-in set of simple, but handy subclasses.
+Startme has built-in set of simple, but handy subclasses.
 
 #### StartMeExec
 Runs external program. E.g.:
