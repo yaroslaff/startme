@@ -88,7 +88,7 @@ Startme workis very simple: It loads all submodules of `startme.mods` (e.g. `sta
 ### Methods
 There are thee important methods of any class inhereted from StartMe:
 
-#### on_start
+#### on_start()
 `on_start()` executed once, when startme starts. This method should return in short time. So, if you want to start something long-running, you should start new thread or process,
 
 #### reschedule()
