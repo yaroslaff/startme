@@ -158,7 +158,7 @@ class StartTest(StartMeExec):
         self._exec = ['ls', '-l']
 ~~~
 
-Usage:
+Rub:
 ~~~
 $ startme -m my.py 
 total 8
@@ -205,7 +205,7 @@ Uptime: 6 seconds
 ...
 ~~~
 
-Next nice feature - just set `self.restart = True` in __init__ of StartTest to get auto-restart:
+Next nice feature - just set `self.restart = True` in `__init__()` of StartTest to get auto-restart:
 ~~~
 $ startme -m my.py uptime.py 
 StartTest start
