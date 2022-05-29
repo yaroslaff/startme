@@ -117,7 +117,7 @@ startme started
 $
 ~~~
 
-Now you can create setup.py and install your module with pip from [pypi](https://pypi.org/) or git repository, startme will start it.
+Now you can create setup.py and install your module with pip from [pypi](https://pypi.org/) or git repository, startme will start it. See [startme-examples](https://github.com/yaroslaff/startme-examples) as working example.
 
 Lets try other test module `uptime.py`:
 ~~~
