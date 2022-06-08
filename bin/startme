@@ -42,6 +42,9 @@ EnvironmentFile=-/etc/default/startme-{name}
 Restart=on-failure
 Type=simple
 
+User=www-data
+Group=www-data
+
 [Install]
 WantedBy=multi-user.target
 """
