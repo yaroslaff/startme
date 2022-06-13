@@ -66,6 +66,8 @@ class Starter:
 
         self._smjobs = [ cls() for cls in startme.meta.__inheritors__ ]
 
+        print("Discovered following StartMe classes:", ' '.join([ str(j) for j in self._smjobs]))
+
         for j in self._smjobs:
             j.on_start()
 

@@ -1,6 +1,6 @@
 from startme import StartMe
 
-class Start(StartMe):
+class StartBanner(StartMe):
     def on_start(self) -> None:
         print("startme started")
 
