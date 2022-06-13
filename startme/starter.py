@@ -7,6 +7,8 @@ import startme.mods
 
 from lightsleep import Sleep
 
+from . import StartMeDisabled
+
 def iter_namespace(ns_pkg):
     # Specifying the second argument (prefix) to iter_modules makes the
     # returned name an absolute name instead of a relative one. This allows
@@ -61,15 +63,39 @@ class Starter:
             in iter_namespace(startme.mods)
         }
 
+    def instantiate(self):
+        # self._smjobs = [ cls() for cls in startme.meta.__inheritors__ ]
+        self._smjobs = list()
+        disabled = list()
+        failed = list()
+
+        for cls in startme.meta.__inheritors__:
+            try:
+                instance = cls()
+                self._smjobs.append(instance)
+            except StartMeDisabled as e:
+                disabled.append(cls.__name__)
+            except:
+                failed.append(cls.__name__)
+
+        if disabled:
+            print(f'Disabled: {" ".join(disabled)}')
+
+        if failed:
+            print(f'Failed: {" ".join(failed)}')
 
     def startup(self):
 
-        self._smjobs = [ cls() for cls in startme.meta.__inheritors__ ]
+        self.instantiate()
 
-        print("Discovered following StartMe classes:", ' '.join([ str(j) for j in self._smjobs]))
+        print("Created:", ' '.join([ str(j) for j in self._smjobs]))
 
         for j in self._smjobs:
-            j.on_start()
+            try:
+                j.on_start()
+            except StartMeDisabled:
+                print
+            
 
         self._sch = {
             j: j.reschedule()

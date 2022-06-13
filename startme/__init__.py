@@ -3,6 +3,12 @@ import threading
 import time
 
 
+class StartMeException(Exception):
+    pass
+
+class StartMeDisabled(StartMeException):
+    pass
+
 class meta(type):
     __inheritors__ = list()
 
