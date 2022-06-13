@@ -2,6 +2,7 @@ import pkgutil
 import importlib
 import time
 import os
+import traceback
 
 import startme.mods
 
@@ -75,7 +76,8 @@ class Starter:
                 self._smjobs.append(instance)
             except StartMeDisabled as e:
                 disabled.append(cls.__name__)
-            except:
+            except Exception as e:
+                traceback.print_exc()
                 failed.append(cls.__name__)
 
         if disabled:
