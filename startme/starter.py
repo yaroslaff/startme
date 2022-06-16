@@ -48,6 +48,7 @@ def import_module(path):
 
 class Starter:
     def __init__(self, hook, mods=None):
+        print("Hook:", hook)
         self._lsleep = Sleep(hook=hook)
         self._mods = mods or list()
 

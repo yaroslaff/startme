@@ -37,7 +37,7 @@ def systemd(name):
 Description=Startme python virtualenv systemd/cron ({name}) 
 
 [Service]
-ExecStart={sys.executable} {os.path.realpath(__file__)}
+ExecStart={sys.executable} -u {os.path.realpath(__file__)}
 EnvironmentFile=-/etc/default/startme-{name}
 Restart=on-failure
 Type=simple
